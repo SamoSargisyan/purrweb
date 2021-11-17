@@ -10,8 +10,7 @@ import {
 } from '@nestjs/common';
 import { CardGuard } from 'src/card/card.guard';
 import { ColumnGuard } from 'src/column/column.guard';
-// import { CheckJwtGuard } from 'src/user/check-jwt.guatd';
-// import { User } from 'src/user/user.decorator';
+import { UserDecorator } from 'src/user/user.decorator';
 import { User } from 'src/user/user.entity';
 import { CardCommentGuard } from './comment.guard';
 import { Comment } from './comment.entity';
@@ -38,7 +37,7 @@ export class CommentController {
   async create(
     @Body() comment: CreateCommentsDTO,
     @Param('card_id') card_id: string,
-    @User() user: User,
+    @UserDecorator() user: User,
   ): Promise<CreateCommentsDTO> {
     return this.commentService.create(user, card_id, comment);
   }
