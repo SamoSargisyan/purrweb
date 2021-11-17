@@ -6,20 +6,21 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { CardService } from './card.service';
+import { CommentService } from './comment.service';
 
 @Injectable()
-export class CardGuard implements CanActivate {
-  constructor(private cardSerivce: CardService) {}
+export class CardCommentGuard implements CanActivate {
+  constructor(private commentSerivce: CommentService) {}
 
   async canActivate(context: ExecutionContext) {
     const req: Request = context.switchToHttp().getRequest();
     try {
-      const card = await this.cardSerivce.findById(req.params.card_id, {
-        relations: ['column'],
-      });
+      const comment = await this.commentSerivce.findById(
+        req.params.comment_id,
+        { relations: ['card'] },
+      );
 
-      if (card.column.id !== Number(req.params.column_id)) {
+      if (comment.card.id !== Number(req.params.card_id)) {
         throw new HttpException(
           'This action is unauthorized',
           HttpStatus.FORBIDDEN,

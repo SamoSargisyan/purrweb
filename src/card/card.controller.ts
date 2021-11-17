@@ -11,12 +11,12 @@ import {
 import { ColumnGuard } from 'src/column/column.guard';
 import { UserGuard } from 'src/user/user.guards';
 import { Card } from './card.entity';
-import { CardsService } from './card.service';
+import { CardService } from './card.service';
 import { CreateCardDTO } from './dto/create.card.dto';
 
 @Controller('users/:user_id/columns/:column_id/cards')
 export class CardController {
-  constructor(private cardsService: CardsService) {}
+  constructor(private cardsService: CardService) {}
 
   @UseGuards(UserGuard, ColumnGuard)
   @Post()
