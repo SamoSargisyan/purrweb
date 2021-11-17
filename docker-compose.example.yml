@@ -26,7 +26,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ${MYSQL_PATH_HOST}:/var/lib/mysql
+      - ./docker-data/mysql-data:/var/lib/mysql
 
   adminer:
     container_name: purrweb_adminer
