@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  node_server:
+    container_name: purrweb_api
+    build:
+      context: .
+      target: development
+      dockerfile: ./dockerfile
+    command: npm run start:debug
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/var/www/app
+      - /var/www/app/node_modules
+
+  mysqldb:
+    container_name: purrweb_mysql
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=purrweb
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=pass
+    ports:
+      - 3306:3306
+    volumes:
+      - ${MYSQL_PATH_HOST}:/var/lib/mysql
+
+  adminer:
+    container_name: purrweb_adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8011:8080
+    depends_on:
+      - mysqldb
