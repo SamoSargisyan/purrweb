@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { env } from 'process';
 import { Card } from './card/card.entity';
@@ -8,7 +7,6 @@ import { Comment } from './comment/comment.entity';
 import { User } from './user/user.entity';
 @Module({
   imports: [
-    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: env.DB_HOST,
