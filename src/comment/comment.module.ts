@@ -12,7 +12,7 @@ import { CommentService } from './comment.service';
     forwardRef(() => CardModule),
     forwardRef(() => ColumnModule),
     forwardRef(() => UserModule),
-    // TypeOrmModule.forFeature([Comment]),
+    TypeOrmModule.forFeature([Comment]),
   ],
   controllers: [CommentController],
   providers: [CommentService],

@@ -10,6 +10,7 @@ import { CardModule } from './card/card.module';
 import { ColumnModule } from './column/column.module';
 import { UserGuard } from './user/user.guards';
 import { AuthModule } from './auth/auth.module';
+import { DataBaseModule } from './database.provider';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     ConfigService,
     AuthModule,
+    DataBaseModule,
     UserModule,
     CommentModule,
     CardModule,
@@ -25,6 +27,7 @@ import { AuthModule } from './auth/auth.module';
   ],
   controllers: [AppController],
   providers: [
+    DataBaseModule,
     AppService,
     {
       provide: APP_GUARD,

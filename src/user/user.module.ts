@@ -12,7 +12,7 @@ import { ColumnModule } from '../column/column.module';
   imports: [
     forwardRef(() => CardModule),
     forwardRef(() => ColumnModule),
-    // TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User]),
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY || 'SECRET_KEY',
       signOptions: {
