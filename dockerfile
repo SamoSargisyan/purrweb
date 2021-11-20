@@ -1,20 +1,10 @@
-FROM node:12.19.0-alpine3.9 AS development
+FROM node:14-alpine
+ENV NODE_ENV=production
 WORKDIR /var/www/app
-COPY package*.json ./
-COPY .env ../
-RUN npm install glob rimraf
-RUN npm install --only=development
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN npm install --production --silent && mv node_modules ../
 COPY . .
-RUN npm run build
-
-FROM node:12.19.0-alpine3.9 as production
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-WORKDIR /var/www/app
-COPY package*.json ./
-RUN npm install --only=production
-COPY . .
-COPY .env ../
-COPY --from=development /var/www/app/dist ./dist
-
-CMD ["node", "dist/main"]
+EXPOSE 3000
+RUN chown -R node /var/www/app
+USER node
+CMD ["npm", "start"]
