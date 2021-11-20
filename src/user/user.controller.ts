@@ -19,7 +19,7 @@ import { ReturnUserDTO } from './dto/return.user.dto';
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
-  @Post()
+  @Post('signup')
   async register(@Body() user: CreateUserDTO): Promise<AuthUserDTO> {
     return this.usersService.create(user);
   }
@@ -41,13 +41,13 @@ export class UserController {
     return await this.usersService.findById(id);
   }
 
-  @UseGuards(UserGuard)
+  // @UseGuards(UserGuard)
   @Delete(':user_id')
   async deleteUser(@Param('user_id') id: string): Promise<boolean> {
     return await this.usersService.delete(id);
   }
 
-  @UseGuards(UserGuard)
+  // @UseGuards(UserGuard)
   @Put(':user_id')
   async updateUser(
     @Param('user_id') id: string,
