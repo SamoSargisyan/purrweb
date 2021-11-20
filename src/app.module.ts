@@ -15,7 +15,7 @@ import { DataBaseModule } from './database.provider';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '../.env',
+      isGlobal: true,
     }),
     ConfigService,
     AuthModule,
