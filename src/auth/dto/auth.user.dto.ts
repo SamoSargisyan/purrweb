@@ -1,5 +1,5 @@
 import { JwtDTO } from './jwt.dto';
-import { ReturnUserDTO } from './return.user.dto';
+import { ReturnUserDTO } from '../../user/dto/return.user.dto';
 
 export class AuthUserDTO extends ReturnUserDTO {
   tokens: JwtDTO;

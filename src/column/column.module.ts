@@ -10,7 +10,7 @@ import { ColumnService } from './column.service';
   imports: [
     forwardRef(() => UserModule),
     forwardRef(() => CardModule),
-    TypeOrmModule.forFeature([CardColumn]),
+    // TypeOrmModule.forFeature([CardColumn]),
   ],
   providers: [ColumnService],
   controllers: [ColumnController],

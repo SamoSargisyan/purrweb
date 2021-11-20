@@ -8,7 +8,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { AuthUserDTO } from './dto/auth.user.dto';
+import { AuthUserDTO } from '../auth/dto/auth.user.dto';
 import { CreateUserDTO } from './dto/create.user.dto';
 import { UserGuard } from './user.guards';
 import { User } from './user.entity';
