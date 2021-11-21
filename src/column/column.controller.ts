@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -13,12 +14,16 @@ import { CardColumn } from './column.entity';
 import { ColumnService } from './column.service';
 import { CreateColumnDTO } from './dto/create.column.dto';
 import { ColumnGuard } from './column.guard';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Column')
 @Controller('users/:user_id/columns')
 export class ColumnController {
   constructor(private readonly columnService: ColumnService) {}
 
-  @Get()
+  @ApiOperation({ summary: 'Find all' })
+  @ApiResponse({ status: HttpStatus.OK, type: [CardColumn] })
+  @Get('all')
   async findUsersColumns(
     @Param('user_id') user_id: string,
   ): Promise<CardColumn[]> {
@@ -26,6 +31,8 @@ export class ColumnController {
   }
 
   @UseGuards(ColumnGuard)
+  @ApiOperation({ summary: 'Find one' })
+  @ApiResponse({ status: HttpStatus.OK, type: [CardColumn] })
   @Get(':column_id')
   async findUserColumnById(
     @Param('column_id') column_id: string,
@@ -34,7 +41,9 @@ export class ColumnController {
   }
 
   @UseGuards(UserGuard)
-  @Post()
+  @ApiOperation({ summary: 'Find one' })
+  @ApiResponse({ status: HttpStatus.CREATED, type: CreateColumnDTO })
+  @Post('add')
   async create(
     @Body() column: CreateColumnDTO,
     @Param('user_id') user_id: string,
@@ -43,6 +52,8 @@ export class ColumnController {
   }
 
   @UseGuards(UserGuard, ColumnGuard)
+  @ApiOperation({ summary: 'Update column' })
+  @ApiResponse({ status: HttpStatus.CREATED, type: CreateColumnDTO })
   @Put(':column_id')
   async update(
     @Param('column_id') column_id: string,
@@ -52,6 +63,8 @@ export class ColumnController {
   }
 
   @UseGuards(UserGuard, ColumnGuard)
+  @ApiOperation({ summary: 'Delete column' })
+  @ApiResponse({ status: HttpStatus.NO_CONTENT })
   @Delete(':column_id')
   async delete(@Param('column_id') column_id: string): Promise<boolean> {
     return this.columnService.delete(column_id);
