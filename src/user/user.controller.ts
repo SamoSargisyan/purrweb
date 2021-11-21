@@ -29,7 +29,7 @@ export class UserController {
     return this.usersService.login(user);
   }
 
-  @Get()
+  @Get('all')
   async findAll(): Promise<User[]> {
     return await this.usersService.findAll({
       relations: ['columns', 'columns.cards', 'comments'],
@@ -41,13 +41,13 @@ export class UserController {
     return await this.usersService.findById(id);
   }
 
-  // @UseGuards(UserGuard)
+  @UseGuards(UserGuard)
   @Delete(':user_id')
   async deleteUser(@Param('user_id') id: string): Promise<boolean> {
     return await this.usersService.delete(id);
   }
 
-  // @UseGuards(UserGuard)
+  @UseGuards(UserGuard)
   @Put(':user_id')
   async updateUser(
     @Param('user_id') id: string,
