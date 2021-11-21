@@ -10,12 +10,12 @@ import { CardService } from './card.service';
 
 @Injectable()
 export class CardGuard implements CanActivate {
-  constructor(private cardSerivce: CardService) {}
+  constructor(private cardService: CardService) {}
 
   async canActivate(context: ExecutionContext) {
     const req: Request = context.switchToHttp().getRequest();
     try {
-      const card = await this.cardSerivce.findById(req.params.card_id, {
+      const card = await this.cardService.findById(req.params.card_id, {
         relations: ['column'],
       });
 

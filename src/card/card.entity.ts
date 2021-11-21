@@ -7,12 +7,22 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Card {
+  @ApiProperty({
+    example: '1',
+    type: String,
+  })
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({
+    description: 'Comment text',
+    example: 'Hello World',
+    type: String,
+  })
   @Column({ nullable: false })
   title: string;
 
