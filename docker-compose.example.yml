@@ -24,7 +24,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./docker-data/postgres-data:/var/lib/postgres
+      - ./docker-data/postgres-data:/var/lib/postgresql/data
 
   adminer:
     container_name: purrweb_adminer
@@ -33,4 +33,4 @@ services:
     ports:
       - 8011:8080
     depends_on:
-      - mysqldb
+      - postgres
