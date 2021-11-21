@@ -10,12 +10,12 @@ import { CommentService } from './comment.service';
 
 @Injectable()
 export class CardCommentGuard implements CanActivate {
-  constructor(private commentSerivce: CommentService) {}
+  constructor(private commentService: CommentService) {}
 
   async canActivate(context: ExecutionContext) {
     const req: Request = context.switchToHttp().getRequest();
     try {
-      const comment = await this.commentSerivce.findById(
+      const comment = await this.commentService.findById(
         req.params.comment_id,
         { relations: ['card'] },
       );

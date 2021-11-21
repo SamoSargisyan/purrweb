@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 import { CreateUserDTO } from './dto/create.user.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
-import { AuthService } from './auth.service';
-import { AuthUserDTO } from './dto/auth.user.dto';
+import { AuthService } from '../auth/auth.service';
+import { AuthUserDTO } from '../auth/dto/auth.user.dto';
 import { ReturnUserDTO } from './dto/return.user.dto';
 
 @Injectable()

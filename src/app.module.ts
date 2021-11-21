@@ -6,18 +6,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommentModule } from './comment/comment.module';
 import { UserModule } from './user/user.module';
-import { AuthService } from './user/auth.service';
 import { CardModule } from './card/card.module';
 import { ColumnModule } from './column/column.module';
 import { UserGuard } from './user/user.guards';
+import { AuthModule } from './auth/auth.module';
+import { DataBaseModule } from './database.provider';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '../.env',
+      isGlobal: true,
     }),
     ConfigService,
-    AuthService,
+    AuthModule,
+    DataBaseModule,
     UserModule,
     CommentModule,
     CardModule,
@@ -25,6 +27,7 @@ import { UserGuard } from './user/user.guards';
   ],
   controllers: [AppController],
   providers: [
+    DataBaseModule,
     AppService,
     {
       provide: APP_GUARD,
